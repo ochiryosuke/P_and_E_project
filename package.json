@@ -1,0 +1,22 @@
+{
+  "name": "p_and_e_project",
+  "version": "1.0.0",
+  "description": "プログラミング研究会と電子計算組織研究会のリポジトリです。",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://harusann@github.com/ochiryosuke/P_and_E_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ochiryosuke/P_and_E_project/issues"
+  },
+  "homepage": "https://github.com/ochiryosuke/P_and_E_project#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
