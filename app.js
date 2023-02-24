@@ -1,12 +1,15 @@
 var express = require('express');
 var app = express();
 
-app.use(express.static('public'));
+const PORT = 3000;
+const HTML_DIR = 'templates'
 
-app.get('/', (request, response) => {
-    response.sendFile(__dirname + '/static/views/index.html')
+app.use(express.static(HTML_DIR));//public ファイルを__dirnameとして使用
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 });
 
-var listener = app.listen(3000, () => {
-    console.log('Listen : ' + listener.address().port);
+var listener = app.listen(PORT, () => {
+    console.log(listener.address().port);
 });

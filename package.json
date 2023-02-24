@@ -2,7 +2,7 @@
   "name": "p_and_e_project",
   "version": "1.0.0",
   "description": "プログラミング研究会と電子計算組織研究会のリポジトリです。",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
