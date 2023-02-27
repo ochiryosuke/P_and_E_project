@@ -2,12 +2,12 @@ var express = require('express');
 var app = express();
 
 const PORT = 3000;
-const HTML_DIR = 'templates'
+const STATIC_DIR = 'static'
 
-app.use(express.static(HTML_DIR));//public ファイルを__dirnameとして使用
+app.use(express.static(STATIC_DIR));//STATIC_DIRディレクトリを静的ファイルの置き場に使用
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/templates/index.html');
 });
 
 var listener = app.listen(PORT, () => {
