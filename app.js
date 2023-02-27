@@ -11,5 +11,5 @@ app.get('/', (req, res) => {
 });
 
 var listener = app.listen(PORT, () => {
-    console.log(listener.address().port);
+    console.log('PORT : ' + listener.address().port);
 });
