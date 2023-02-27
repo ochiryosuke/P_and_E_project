@@ -1,16 +1,90 @@
 <!DOCTYPE HTML>
-<html>
-  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AR Test by Shiryu</title>
+    <!--a-frame, ar.js,  jQueryを読み込む-->
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+  </head>
+
+  <script>
+  AFRAME.registerComponent('box1', {
+    init: function()
+    {
+
+      var marker = this.el;
+
+      marker.addEventListener('markerFound', function () {
+        console.log("box1を発見した");
+        $('#box2').attr('src', './image/maru.png');
+      });
+
+      marker.addEventListener('markerLost', function () {
+        console.log("box1を見失った");
+        $('#box2').attr('src', './image/batu.png');
+      });
+    }
+  });
+  </script>
+
   <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs>
-      <a-marker type='pattern' url='./pattern-ku.patt'>
-          <a-box src="./image/YURUSHITE.jpg" position='0 0.5 0'></a-box>
+
+      <!-- OBJ形式のCGモデルの読み込み -->
+      <a-assets>
+        <a-asset-item id="obj" src="./Desk&Chair/Desk&Chair.obj"></a-asset-item>   <!-- objファイル -->
+        <a-asset-item id="mtl" src="./Desk&Chair/Desk&Chair.mtl"></a-asset-item>   <!-- mtlファイル -->
+      </a-assets>
+
+      <a-marker 3dmodel type='pattern' url='./patts/pattern-purin.patt'>
+        <a-obj-model
+          src="#obj"
+          mtl="#mtl"
+          scale="0.25 0.25 0.25"
+          position="0.2 0 0"
+          animation="property:rotation; from:0 0 0; to:0 360 0; dur:3000; easing:linear; loop:true;">
+        </a-obj-model>
       </a-marker>
-      <a-marker type='pattern' url='./pattern-test.patt'>
-            <a-box src="./image/testImage.png" position='0 0.5 0'></a-box>
-        </a-marker>
+
+      <a-marker box1 type='pattern' url='./Patts/pattern-ku.patt'>
+          <a-box src="./image/YURUSHITE.jpg" position='0 0.5 0' id = "box1"></a-box>
+      </a-marker>
+
+      <a-marker box2 type='pattern' url='./Patts/OECU.patt'>
+            <a-box src="./image/batu.png" position='0 0.5 0' id = box2></a-box>
+      </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+
+    <div style="position: fixed; bottom: 150px;">
+      <button type="button" id="b1">YURUSHITE</button>
+      <button type="button" id="b2">Hand in Hand</button>
+      <button type="button" id="b3">ロストワンの号哭</button>
+    </div>
+
+    <script>
+      $(function() {
+
+        $('#b1').click(function(e) {
+          $('#box1').attr('src', './image/YURUSHITE.jpg');
+          console.log("b1ボタンが押されました");
+        });
+
+        $('#b2').click(function(e) {
+          $('#box1').attr('src', './image/Hand in Hand.png');
+          console.log("b2ボタンが押されました");
+        });
+
+        $('#b3').click(function(e) {
+          $('#box1').attr('src', './image/ロストワンの号哭.jpg');
+          console.log("b3ボタンが押されました");
+        });
+      });
+    </script>
+
   </body>
 </html>
