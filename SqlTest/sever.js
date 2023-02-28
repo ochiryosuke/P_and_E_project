@@ -54,13 +54,51 @@ app.get("/clearWindow", (req,res) => {
             `UPDATE clearstage SET Stage1 = true WHERE id = 1;`, 
             (err, rows) => {
                 connection.release();
-
-                // console.log(rows);
                 if(!err) {
-                    res.redirect("/");//同じページを再読み込み(リダイレクト)
+                    //res.send(`<h1>クリアしました</h1><a href="./reset"><p>クリア状況をリセットする</p></a><p>${{clearstage:results}}</p>`);
+                    //res.redirect("/");//同じページを再読み込み(リダイレクト)
                 } else {
                     console.log(err);
                 }
+            }
+        );
+
+        connection.query(
+            'SELECT * FROM clearstage',
+            (error, results) => {
+              res.render('clear.ejs',{clearstage:results});
+            }
+        );
+
+    });
+});
+
+app.get("/reset", (req,res) => {
+    console.log("リセット画面に移行しました");
+    
+    pool.getConnection((err, connection) => {
+        if(err) throw err;
+
+        console.log("MYSQLと接続中...");
+        connection.query(
+            `UPDATE clearstage SET Stage1 = false;`, 
+            (err, rows) => {
+                connection.release();
+
+                console.log(rows);
+                if(!err) {
+                    //res.send('<h1>リセットしました</h1><a href="/"><p>ARに戻る</p></a>');
+                    //res.redirect("/");//同じページを再読み込み(リダイレクト)
+                } else {
+                    console.log(err);
+                }
+            }
+        );
+
+        connection.query(
+            'SELECT * FROM clearstage',
+            (error, results) => {
+              res.render('reset.ejs',{clearstage:results});
             }
         );
     });

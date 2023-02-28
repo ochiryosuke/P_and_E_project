@@ -15,7 +15,7 @@
   </head>
 
   <body style='margin : 0px; overflow: hidden;'>
-    <a-scene embedded arjs>
+    <a-scene embedded arjs="debugUIEnabled:false;" renderer="gameOutput: true;" vr-mode-ui="enabled: false">
 
       <!-- OBJ形式のCGモデルの読み込み -->
       <a-assets>
@@ -49,7 +49,7 @@
       <a-entity camera></a-entity>
     </a-scene>
 
-    <div style="position: fixed; bottom: 150px;">
+    <div style="position: fixed; bottom: 0px;">
       <button type="button" id="b1">YURUSHITE</button>
       <button type="button" id="b2">Hand in Hand</button>
       <button type="button" id="b3">ロストワンの号哭</button>
