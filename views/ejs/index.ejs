@@ -11,19 +11,24 @@
 </head>
 <body style="margin:0px; overflow:hidden;">
   
-  <div class="answer hide" style="position: fixed; top: 20px; left: 20px;">
-    <h2 style="color: red;">大阪電気通信大学</h2>
-  </div>
-  <script src="/js/ARinit.js"></script>
-  <a-scene embedded arjs="debugUIEnabled:false;"  renderer="gammaOutput: true;" vr-mode-ui="enabled: false">
-    <a-marker marker id="AR.js" type="pattern" url='/pattern/pattern-marker.patt'>
-      <a-box position='0 0.5 0' material='color: black;'></a-box>
-    </a-marker>
-    <a-marker marker id="OECU" type="pattern" url='/pattern/pattern-images.patt'>
-      <a-box position='0 0.5 0' material='color: white;'></a-box>
-    </a-marker>
-    <a-entity camera></a-entity>
-  </a-scene>
-  <script src="/js/test.js"></script>
+    <div class="answer hide" style="position: fixed; top: 20px; left: 20px;">
+        <h2 style="color: red;">大阪電気通信大学</h2>
+    </div>
+    <script src="/js/ARinit.js"></script>
+    <a-scene embedded arjs="debugUIEnabled:false;"  renderer="gammaOutput: true;" vr-mode-ui="enabled: false">
+        <a-assets timeout="10000">
+            <img id="img_paper" src="/image/old_paper.jpg"></img>
+        </a-assets>
+        <a-marker marker id="AR.js" type="pattern" url='/pattern/pattern-marker.patt'>
+        <a-box position='0 0.5 0' material='color: black;'></a-box>
+        </a-marker>
+        <a-marker marker id="OECU" type="pattern" url='/pattern/pattern-images.patt'>
+            <a-image id="my_btn01" src="#img_paper" position="0 1.2 -3" scale="0.3 0.3 0.3"></a-image>
+            <a-box position='0 0.5 0' material='color: white;'></a-box>
+            <a-text position="0 1 0" value="Hello, World!" color="black"></a-text>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+    <script src="/js/test.js"></script>
 </body>
 </html>

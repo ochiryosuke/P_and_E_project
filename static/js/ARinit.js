@@ -1,8 +1,3 @@
-class FoundMarker {
-  founded =  new Boolean();
-  id = new String();
-}
-
 AFRAME.registerComponent('marker', {
     init: function () {
 
@@ -26,7 +21,3 @@ AFRAME.registerComponent('marker', {
       
     }
 });
-
-MarkerSense = (markerId) => {
-
-}
