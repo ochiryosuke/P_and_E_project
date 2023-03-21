@@ -1,23 +1,99 @@
-AFRAME.registerComponent('marker', {
-    init: function () {
+    const quiz = [
+        {
+            "quiz":"日本の首都は大阪",
+            "answer":"no-button"
+        },
+        {
+            "quiz":"大阪電気通信大学の略称はOECU",
+            "answer":"yes-button"
+        }
+    ]
 
-      const $markers = document.querySelectorAll('a-marker')//a-markerタグのDOM要素を引用
-      $markers.forEach((marker) => {//a-markerタグの要素それぞれにイベントを登録
-      const $answer = document.querySelector('answer');
-      
-      console.log($answer)
-        // マーカーを検出した際のイベント
-        marker.addEventListener('markerFound', function () {
-            var markerId = marker.id;
-            console.log('markerFound', markerId);
-        });
+    let quiz_num = 0;
+    let correct_answers = 0;
+    let is_nextClick = true;
+    let is_ansClick = true;
 
-        // マーカーを見失った際のイベント
-        marker.addEventListener('markerLost', function () {
-            var markerId = marker.id;
-            console.log('markerLost', markerId);
-        });
-      });
-      
-    }
-});
+    const $quiz_text = document.getElementsByClassName('quiz-text');
+    const $type_text = document.getElementsByClassName('type-text');
+    const $yes_button = document.getElementsByClassName('yes-button');
+    const $no_button = document.getElementsByClassName('no-button');
+    const $next_button = document.getElementsByClassName('next-button');
+    const $end_text = document.getElementsByClassName('end-text');
+    const $point_text = document.getElementsByClassName('point-text');
+
+    const change_text = ($dom, txt) => {
+        $dom.innerHTML = '';
+        $dom.setAttribute('data-text', txt);
+        aframeMutlByte();
+    };
+
+    AFRAME.registerComponent('yes-button', {
+        init: function () {
+            $yes_button[0].addEventListener('click', function (event) {
+                if(is_ansClick === true) {
+                    if(quiz[quiz_num]['answer'] === 'yes-button'){
+                        console.log('正解');
+                        correct_answers++;
+                    }
+                    else console.log('不正解')
+                    change_text($quiz_text[0], quiz[quiz_num]['answer']);
+                    change_text($type_text[0], '答え');
+                    $next_button[0].setAttribute('visible', 'true');
+                    $yes_button[0].setAttribute('visible', 'false');
+                    $no_button[0].setAttribute('visible', 'false');
+                    is_nextClick = true;
+                    is_ansClick = false;
+                }
+            });
+        }
+    });
+
+    AFRAME.registerComponent('no-button', {
+        init: function () {
+            $no_button[0].addEventListener('click', function (event) {
+                if (is_ansClick === true) {
+                    if(quiz[quiz_num]['answer'] === 'no-button') {
+                        console.log('正解');
+                        correct_answers++;
+                    }
+                    else console.log('不正解')
+                    change_text($quiz_text[0], quiz[quiz_num]['answer']);
+                    change_text($type_text[0], '答え');
+                    $next_button[0].setAttribute('visible', 'true');
+                    $yes_button[0].setAttribute('visible', 'false');
+                    $no_button[0].setAttribute('visible', 'false');
+                    is_nextClick = true;
+                    is_ansClick = false;
+                }
+            });
+        }
+    });
+
+    AFRAME.registerComponent('next-button', {
+        init: function () {
+            $next_button[0].addEventListener('click', function (event) {
+                if(is_nextClick === true) {
+                    quiz_num = quiz_num + 1;
+                    if(quiz.length - 1 >= quiz_num){
+                        console.log('問題 : ' + (quiz_num + 1))
+                        change_text($quiz_text[0], quiz[quiz_num]['quiz']);
+                        change_text($type_text[0], '問題');
+                        $next_button[0].setAttribute('visible', 'false');
+                        $yes_button[0].setAttribute('visible', 'true');
+                        $no_button[0].setAttribute('visible', 'true');
+                        is_ansClick = true;
+                    }
+                    else {
+                        change_text($point_text[0], '' + correct_answers + ' / ' + quiz.length)
+                        $quiz_text[0].setAttribute('visible', 'false');
+                        $type_text[0].setAttribute('visible', 'false');
+                        $next_button[0].setAttribute('visible', 'false');
+                        $end_text[0].setAttribute('visible', 'true');
+                        $point_text[0].setAttribute('visible', 'true');
+                    }
+                    is_nextClick = false;
+                }
+            });
+        }
+    });
