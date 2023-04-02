@@ -1,54 +1,116 @@
-<!DOCTYPE HTML>
-<html lang="ja">
+<!-- BEGIN: Top HTML -->
+<!DOCTYPE html>
+<!-- include aframe -->
+<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+<!-- include ar.js -->
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.js"></script>
 
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>AR Test by Shiryu</title>
-    <!--a-frame, ar.js,  jQueryを読み込む-->
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <script src = ./JS/BoxSearcher.js></script>
-    <script src = ./JS/clickButton.js></script>
-  </head>
+<!-- to load .ply model -->
+<script src="https://rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.loaders.min.js"></script>
 
-  <body style='margin : 0px; overflow: hidden;'>
-    <a-scene embedded arjs>
+<!-- END: Top HTML -->
+<!-- BEGIN: Unity Compiled Events -->
+<script>
+var markerFound = 0;
+AFRAME.registerComponent('button', {
+init: function () {
+var elem = document.documentElement;
+var marker = document.querySelector("#marker");
+var fullbutton = document.querySelector("#fullscreen");
+marker.addEventListener("markerFound", function (evt) {
+markerFound = 1;
+});
+marker.addEventListener("markerLost", function (evt) {
+markerFound = 0;
+});
+fullbutton.addEventListener("click", function (evt) {
+                if (fullscreen == 0) {
+                    if (elem.requestFullscreen) {
+                        elem.requestFullscreen();
+                    } else if (elem.mozRequestFullScreen) {
+                        /* Firefox */
+                        elem.mozRequestFullScreen();
+                    } else if (elem.webkitRequestFullscreen) {
+                        /* Chrome, Safari and Opera */
+                        elem.webkitRequestFullscreen();
+                    } else if (elem.msRequestFullscreen) {
+                        /* IE/Edge */
+                        elem.msRequestFullscreen();
+                    }
+                    fullbutton.setAttribute("src", "../exit_fullscreen.png");
+                    fullscreen = 1;
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                    fullbutton.setAttribute("src", "../fullscreen.png");
+                    fullscreen = 0;
+                }
 
-      <!-- OBJ形式のCGモデルの読み込み -->
-      <a-assets>
-        <a-asset-item id="obj" src="./Desk&Chair/Desk&Chair.obj"></a-asset-item>   <!-- objファイル -->
-        <a-asset-item id="mtl" src="./Desk&Chair/Desk&Chair.mtl"></a-asset-item>   <!-- mtlファイル -->
-      </a-assets>
+            });
+},
+tick: function (totalTime, deltaTime) {
+var dTime = deltaTime / 1000;
 
-      <a-marker 3dmodel type='pattern' url='./pattern-purin.patt'>
-        <a-obj-model
-          Desk_Chair
-          src="#obj"
-          mtl="#mtl"
-          scale="0.25 0.25 0.25"
-          position="0.25 0 0"
-          rotation="0 0 0"
-          animation="property:rotation; from:0 0 0; to:0 360 0; dur:3000; easing:linear; loop:true;">
-        </a-obj-model>
-      </a-marker>
+if (markerFound == 1) {
+}
 
-      <a-marker box1 type='pattern' url='./pattern-ku.patt'>
-          <a-box src="./image/YURUSHITE.jpg" position='0 0.5 0' id = "box1"></a-box>
-      </a-marker>
+function bezierEvaluate(p0, p1, p2, p3, t) {
+                var u = (1 - t);
+                var uu = u * u;
+                var uuu = u * u * u;
+                var tt = t * t;
+                var ttt = t * t * t;
+                //B(t) = (1-t)^3*P0 + 3*(1-t)^2*t*P1 + 3*(1-t)*t^2*P2 + t^3*P3 , 0 < t < 1
+                return (uuu * p0 + 3 * uu * t * p1 + 3 * u * tt * p2 + ttt * p3);
 
-      <a-marker box2 type='pattern' url='./OECU.patt'>
-            <a-box src="./image/batu.png" position='0 0.5 0' id = box2></a-box>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
+            }
+           function bezierPath(p0, p1, p2, p3, t) {
+                return new THREE.Vector3(
+                    bezierEvaluate(p0.x, p1.x, p2.x, p3.x, t),
+                    bezierEvaluate(p0.y, p1.y, p2.y, p3.y, t),
+                    bezierEvaluate(p0.z, p1.z, p2.z, p3.z, t)
+                );
+            }
 
-    <div style="position: fixed; bottom: 150px;">
-      <button type="button" id="b1">YURUSHITE</button>
-      <button type="button" id="b2">Hand in Hand</button>
-      <button type="button" id="b3">ロストワンの号哭</button>
+        }
+});
+</script>
+<!-- END: Unity Compiled Events -->
+
+<!-- BEGIN: Middle HTML -->
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+<div style='position: absolute; bottom: 5px; left: 30px; width:100%; text-align: right; z-index: 1;'>
+        <input type="image" id="fullscreen" src="../fullscreen.png" style='position: absolute; bottom: 0px; right: 35px;'>
+        </input>
     </div>
+<!-- <a-scene embedded arjs='debugUIEnabled: false; sourceType: video; sourceUrl:../../data/videos/headtracking.mp4;'> -->
+    <a-scene embedded arjs='debugUIEnabled: false; sourceType: webcam' vr-mode-ui='enabled: false'>
+    <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .intersectable; useWorldCoordinates: true;"></a-entity>
+<!-- END: Middle HTML -->
 
-  </body>
-</html>
+<!-- BEGIN: Unity Compiled Assets -->
+<a-assets>
+</a-assets>
+<!-- END: Unity Compiled Assets -->
+<!-- BEGIN: Add Image Target (marker) -->
+<a-marker id="marker" type="pattern" preset="custom" src="pattern-ku.patt" url="pattern-ku.patt" emitevents="true" button>
+<!-- END: Add Image Target (marker) -->
+
+<!-- BEGIN: Unity Compiled Objects -->
+<a-box src="" id="Cube_0" class="intersectable" width="0.1" height="0.1" depth="0.1" position="-0.0009999999 0.096 0.012" rotation="0 0 0" color="#FFFFFF" transparent=False
+></a-box>
+<!-- END: Unity Compiled Objects -->
+
+<!-- BEGIN: Bottom HTML -->
+</a-marker>
+        <a-entity camera></a-entity>
+        </a-scene>
+</body>
+</html><!-- END: Bottom HTML -->

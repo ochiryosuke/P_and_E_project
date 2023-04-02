@@ -13,5 +13,19 @@ AFRAME.registerComponent('box1', {
         console.log("box1を見失った");
         $('#box2').attr('src', './image/batu.png');
       });
-    }
+    },
+
+    tick: function(delta) {
+
+      var marker = this.el;
+
+      const rot = marker.getAttribute('rotation');
+      console.log("x："+rot.x+"y："+rot.y+"z："+rot.z);
+  },
+
+  tick: function (time, timeDelta) 
+	{
+    console.log("回転中");
+		this.el.object3D.rotation.y += 0.01
+	}
 });
