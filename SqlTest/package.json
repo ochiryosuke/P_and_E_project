@@ -1,7 +1,6 @@
 {
   "name": "nodejs-mysql-fileuploader",
   "version": "1.0.0",
-  "description": "",
   "main": "sever.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,6 +15,7 @@
     "express-fileupload": "^1.4.0",
     "express-handlebars": "^6.0.7",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.20"
-  }
+    "nodemon": "^2.0.22"
+  },
+  "description": ""
 }
