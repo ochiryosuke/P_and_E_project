@@ -9,6 +9,9 @@ AFRAME.registerComponent('box1', {
         $('#box2').attr('src', './image/maru.png');
       });
 
+
+      
+
       marker.addEventListener('markerLost', function () {
         console.log("box1を見失った");
         $('#box2').attr('src', './image/batu.png');
