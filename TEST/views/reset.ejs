@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SAMPLE</title>
+  </head>
+  <body>
+      <ul>
+        <h1>リセットしました</h1>
+        <% clearstage.forEach((stage) => { %>
+          <div>
+            id：
+            <span><%= stage.id %></span>
+            Stage1：
+            <span><%= stage.Stage1 %></span>
+          </div>
+        <% }) %>
+        <a href="/"><p>ARに戻る</p></a>
+      </ul>
+  </body>
+</html>

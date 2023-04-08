@@ -13,6 +13,7 @@
     <script src = ./JS/ClickButton.js></script>
     <script src = ./JS/ClearJudgment.js></script>
     <script src = ./JS/MoveObject.js></script>
+    <script src = ./JS/Collision.js></script>
   </head>
 
   <body style='margin : 0px; overflow: hidden;'>
@@ -36,8 +37,8 @@
       </a-marker>
 
       <a-marker boxm1 type='pattern' url='./pattern-ku.patt'>
-          {{!-- <a-box src="./image/YURUSHITE.jpg" position='0 0.5 0' id = "box1"></a-box> --}}
-          <a-sphere position='1 0.5 0' scale='0.25 0.25 0.25' material='color: white;' id = "ball" moveobject></a-sphere>
+          <a-box class="collidable" src="./image/YURUSHITE.jpg" position='0 0.5 0' id = "box1"></a-box>
+          <a-sphere position='1 0.5 0' scale='0.25 0.25 0.25' material='color: white;' id = "ball" raycaster="objects: .collidable; far: 1;" collider-check moveobject></a-sphere>
       </a-marker>
 
       <a-marker boxm2 type='pattern' url='./OECU.patt'>
