@@ -12,6 +12,7 @@
     <script src = ./JS/BoxSearcher.js></script>
     <script src = ./JS/ClickButton.js></script>
     <script src = ./JS/ClearJudgment.js></script>
+    <script src = ./JS/MoveObject.js></script>
   </head>
 
   <body style='margin : 0px; overflow: hidden;'>
@@ -34,15 +35,15 @@
         </a-obj-model>
       </a-marker>
 
-      <a-marker box1 type='pattern' url='./pattern-ku.patt'>
-          <a-box src="./image/YURUSHITE.jpg" position='0 0.5 0' id = "box1"></a-box>
+      <a-marker boxm1 type='pattern' url='./pattern-ku.patt'>
+          <a-box src="./image/YURUSHITE.jpg" position='0 0.5 0' id = "box1" moveobject></a-box>
       </a-marker>
 
-      <a-marker box2 type='pattern' url='./OECU.patt'>
+      <a-marker boxm2 type='pattern' url='./OECU.patt'>
             <a-box src="./image/batu.png" position='0 0.5 0' id = "box2"></a-box>
       </a-marker>
 
-      <a-marker box3 type='pattern' url='./pattern-hiyoko.patt'>
+      <a-marker boxm3 type='pattern' url='./pattern-hiyoko.patt'>
           <a-box position='0 0.5 0' material='color: white;' id = "box3"></a-box>
       </a-marker>
 
