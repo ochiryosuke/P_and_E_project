@@ -1,11 +1,11 @@
     const quiz = [
         {
             "quiz":"日本の首都は大阪",
-            "answer":"no-button"
+            "answer":"no"
         },
         {
             "quiz":"大阪電気通信大学の略称はOECU",
-            "answer":"yes-button"
+            "answer":"yes"
         }
     ]
 
@@ -21,6 +21,7 @@
     const $next_button = document.getElementsByClassName('next-button');
     const $end_text = document.getElementsByClassName('end-text');
     const $point_text = document.getElementsByClassName('point-text');
+    const $clear_num = document.getElementsByClassName('clear-num');
 
     const change_text = ($dom, txt) => {
         $dom.innerHTML = '';
@@ -32,7 +33,7 @@
         init: function () {
             $yes_button[0].addEventListener('click', function (event) {
                 if(is_ansClick === true) {
-                    if(quiz[quiz_num]['answer'] === 'yes-button'){
+                    if(quiz[quiz_num]['answer'] === 'yes'){
                         console.log('正解');
                         correct_answers++;
                     }
@@ -53,7 +54,7 @@
         init: function () {
             $no_button[0].addEventListener('click', function (event) {
                 if (is_ansClick === true) {
-                    if(quiz[quiz_num]['answer'] === 'no-button') {
+                    if(quiz[quiz_num]['answer'] === 'No') {
                         console.log('正解');
                         correct_answers++;
                     }
@@ -91,6 +92,7 @@
                         $next_button[0].setAttribute('visible', 'false');
                         $end_text[0].setAttribute('visible', 'true');
                         $point_text[0].setAttribute('visible', 'true');
+                        $clear_num[0].innerHTML = 'クリア数　1 / 1'
                     }
                     is_nextClick = false;
                 }
