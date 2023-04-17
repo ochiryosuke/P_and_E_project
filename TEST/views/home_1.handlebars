@@ -13,23 +13,25 @@
       {{!-- <a-camera id="camera" active="true" look-controls wasd-controls position="0 1.6 0" data-aframe-default-camera></a-camera> --}}
       <a-marker marker type="pattern" url="pattern-ku.patt">
         <a-sphere
-          ball
-          position="0 0.5 0"
+          position="-1 0.3 -2"
+          rotation="0 5 0"
           color="#4CC3D9"
           radius="0.3"
           depth="0.5"
-          dynamic-body="linearDamping:0.9;mass:0;"
+          dynamic-body="linearDamping:0.9;mass:10;"
         ></a-sphere>
 
         {{!-- 床 --}}
         <a-plane
-          position="0 -1 0"
+          position="0 -1 -4"
           rotation="-110 0 0"
           width="10"
           height="10"
           color="#7BC8A4"
           static-body
         ></a-plane>
+
+      </a-marker>
 
       {{!-- 壁 --}}
       {{!-- <a-plane
@@ -41,7 +43,6 @@
         static-body
       ></a-plane> --}}
 
-      </a-marker>
         {{!-- <a-sky color="#ECECEC"></a-sky> --}}
       <a-entity camera></a-entity>
     </a-scene>
