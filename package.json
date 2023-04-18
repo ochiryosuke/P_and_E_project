@@ -1,0 +1,15 @@
+{
+  "name": "ar",
+  "version": "1.0.0",
+  "description": "プログラミング研究会と電子計算組織研究会のリポジトリです。",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http": "^0.0.1-security"
+  }
+}
