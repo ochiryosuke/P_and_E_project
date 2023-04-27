@@ -1,16 +1,8 @@
-const http = require("http");
+const express = require("express");
+const app = express();
+
 const PORT = 5000;
-const html = require("fs").readFileSync("./index.html")
 
+app.use(express.static("public"));
 
-//webサーバーを作ろう
-const server = http.createServer((req, res) => {
-    //ブラウザからアクセスが来た時の処理
-    res.writeHead(200, { "Content-Type": "text/html"});
-    res.write(html);
-    res.end();
-});
-
-server.listen(PORT, () => {
-    console.log("server running!");
-});
+app.listen(PORT, () => console.log("サーバーが起動しました。"));
