@@ -62,6 +62,13 @@ h2{
 b{
     text-align: center;
 }
+
+.mainArea{
+    width:100%;
+    
+    text-align: center;
+}
+
 #timer{
     font-size: 40px;
     text-align: center;
