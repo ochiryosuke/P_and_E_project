@@ -79,3 +79,14 @@ b{
     color: red;
     margin: 0px;
 }
+button {
+    background-color: #f53e3e;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #d77b7b;
+}
