@@ -1,11 +1,23 @@
     const quiz = [
         {
-            "quiz":"日本の首都は大阪",
+            "quiz":"大阪電気通信大学には2つのキャンパスがある",
+            "answer":"yes"
+        },
+        {
+            "quiz":"大阪電気通信大学の略称はOETU",
             "answer":"no"
         },
         {
-            "quiz":"大阪電気通信大学の略称はOECU",
+            "quiz":"A号館３階にはプロジェクトルームがある",
             "answer":"yes"
+        },
+        {
+            "quiz":"Z号館にある生協の施設は3つ",
+            "answer":"no"
+        },
+        {
+            "quiz":"",
+            "answer":"no"
         }
     ]
 
@@ -30,8 +42,8 @@
     };
 
     AFRAME.registerComponent('yes-button', {
-        init: function () {
-            $yes_button[0].addEventListener('click', function (event) {
+        init: () => {
+            $yes_button[0].addEventListener('click', (event) => {
                 if(is_ansClick === true) {
                     if(quiz[quiz_num]['answer'] === 'yes'){
                         console.log('正解');
@@ -51,8 +63,8 @@
     });
 
     AFRAME.registerComponent('no-button', {
-        init: function () {
-            $no_button[0].addEventListener('click', function (event) {
+        init: () => {
+            $no_button[0].addEventListener('click', (event) => {
                 if (is_ansClick === true) {
                     if(quiz[quiz_num]['answer'] === 'No') {
                         console.log('正解');
@@ -72,8 +84,8 @@
     });
 
     AFRAME.registerComponent('next-button', {
-        init: function () {
-            $next_button[0].addEventListener('click', function (event) {
+        init: () => {
+            $next_button[0].addEventListener('click', (event) => {
                 if(is_nextClick === true) {
                     quiz_num = quiz_num + 1;
                     if(quiz.length - 1 >= quiz_num){
@@ -92,7 +104,7 @@
                         $next_button[0].setAttribute('visible', 'false');
                         $end_text[0].setAttribute('visible', 'true');
                         $point_text[0].setAttribute('visible', 'true');
-                        $clear_num[0].innerHTML = 'クリア数　1 / 1'
+                        $clear_num[0].innerHTML = 'クリア数　1 / 1';
                     }
                     is_nextClick = false;
                 }
