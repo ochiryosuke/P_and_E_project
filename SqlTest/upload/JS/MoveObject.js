@@ -1,6 +1,7 @@
 //他のやり方を思いつくまではグローバル変数を仮使用
 var isIntersect = false;//壁に当たったらtrueになる
 var ballPos = 0;
+var speed = 0.001;
 
 AFRAME.registerComponent('moveobject', {
   tick: function(delta) {
@@ -8,17 +9,16 @@ AFRAME.registerComponent('moveobject', {
     var obj = this.el;
     ballPos = obj.object3D.position;
 
-    if(!isIntersect)
+    if(isIntersect)
     {
-      //rotはARマーカーの角度。BoxSearcherから取ってきている
-      obj.object3D.position.x += rot.z * -0.0005;
-      obj.object3D.position.z += (90 - rot.x) * -0.0005;
-      //console.log("球の動きを反映");
+      //console.log("GAMEOVER");
     }
     else
     {
-      //xかzどちらが当たっているか確認し、当たっていない方向へは動けるようにする
-      //console.log("衝突！");
+      //rotはARマーカーの角度。BoxSearcherから取ってきている
+      obj.object3D.position.x += rot.z * -speed;
+      obj.object3D.position.z += (90 - rot.x) * -speed;
+      //console.log("球の動きを反映");
     }
 
     //console.log("x: "+rot.x+"y: "+rot.y+"z: "+rot.z);//玉の位置

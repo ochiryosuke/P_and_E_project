@@ -11,8 +11,8 @@ function CollisionWithPoint(clamped,ballPosition){
     console.log("ball地点 x:"+ballPosition.x+" z:"+ballPosition.z);
     console.log("最短地点 x:"+clamped.x+" z:"+clamped.z);
     console.log("lenge:"+lenge);
-    //その長さと円の半径(0.25)を比べる
-    if(lenge <= 0.25)
+    //その長さと円の半径(0.125)を比べる
+    if(lenge <= 0.125)
     {
         return true;
     }
